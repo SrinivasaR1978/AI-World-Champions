@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - HRSAI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333333;
+    }
+    .header {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .header img {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      color: #6a0dad; /* purple accent */
+      margin: 10px 0;
+    }
+    .header p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+       background-color: skyblue;
+    }
+    .content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #007BFF;
+      margin-top: 20px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .logout {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .logout a {
+      background: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .logout a:hover {
+      background: #b52a37;
+    }
+  </style>
+  
+</head>
+<body>
+<!-- Banner Section -->
+<div style="background-color: skyblue; padding: 10px; border-radius: 10px; position: relative;">
+
+    <!-- Buttons at top-right -->
+    <div style="position: absolute; top: 20px; right: 20px;">
+
+        <a href="/home" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                       padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">Home</button>
+        </a>
+        <a href="/ai" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                   padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">AI</button>
+        </a>
+        <a href="/aitools" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                   padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">AI Tools</button>
+        </a>
+        <a href="/projects" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                       padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">Projects</button>
+        </a>
+        <a href="/Documents" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                       padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">Documents</button>
+        </a>
+        <a href="/contact" style="text-decoration: none;">
+                          <button style="background-color: darkblue; color: white; border: none; 
+                       padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">Contact Us</button>
+        </a>
+        <a href="/Signout" style="text-decoration: none;">
+        <button style="background-color: darkblue; color: white; border: none; 
+                       padding: 10px 18px; margin-left: 8px; border-radius: 5px; cursor: pointer;">Signout</button>
+        </a>                       
+    </div>
+
+    <!-- Heading -->
+    <h1 style="margin: 0; color: darkblue; text-align: center; margin-top: 60px;">
+        The World of Artificial Intelligence
+    </h1>
+
+    <!-- Paragraph -->
+    <p style="color: darkblue; font-size: 18px; line-height: 1.6; max-width: 1000px; 
+              margin: 10px auto; text-align: center;">
+        Welcome to your comprehensive guide to understanding Artificial Intelligence. <br>
+        Explore the fascinating domains of Machine Learning, Deep Learning, and Data Science, <br>
+        or discover the most powerful AI tools transforming industries today.
+    </p>
+
+    <!-- Image below text -->
+    <div style="text-align: center;">
+        <img src="static/images.jpeg" alt="AI Robot" 
+             style="max-width: 300px; width: 100%; margin-top: 10px; border-radius: 10px;">
+    </div>
+</div>
+
+<!-- New Section (3 Boxes with Buttons) -->
+<div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px;">
+
+    <!-- Box 1 -->
+    <div style="background-color: #f5f9ff; padding: 10px; border-radius: 10px; width: 280px; text-align: center; 
+                box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+        <img src="static/Rose.jpeg" alt="AI Domains" style="width: 100px; margin-bottom: 10px;">
+        <h3 style="color: black;">AI Domains</h3>
+        <p style="color: #444;">Explore Machine Learning, Deep Learning, and Data Science with detailed explanations, applications, and interactive tree structures.</p>
+        
+        <!-- Buttons -->
+        <div style="margin-top: 10px;">
+            <button style="background-color: darkblue; color: white; border: none; padding: 8px 14px; margin: 5px; border-radius: 5px; cursor: pointer;">AI Domains</button>
+        </div>
+    </div>
+
+    <!-- Box 2 -->
+    <div style="background-color: #f5f9ff; padding: 10px; border-radius: 12px; width: 280px; text-align: center; 
+                box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+        <img src="static/Rose1.jpeg" alt="AI Tools" style="width: 100px; margin-bottom: 10px;">
+        <h3 style="color: black;">AI Tools</h3>
+        <p style="color: #444;">Discover 50+ cutting-edge AI tools across 18 categories, from content creation to automation and everything in between.</p>
+        
+        <!-- Buttons -->
+        <div style="margin-top: 10px;">
+            <button style="background-color: darkblue; color: white; border: none; padding: 8px 14px; margin: 5px; border-radius: 5px; cursor: pointer;">AI Tools</button>
+        </div>
+    </div>
+
+    <!-- Box 3 -->
+    <div style="background-color: #f5f9ff; padding: 10px; border-radius: 12px; width: 280px; text-align: center; 
+                box-shadow: 0px 4px 10px rgba(0,0,0,0.1);">
+        <img src="static/Rose2.jpeg" alt="Real Applications" style="width: 120px; margin-bottom: 15px;">
+        <h3 style="color: black;">Real Applications</h3>
+        <p style="color: #444;">Learn about practical applications, real-world examples, and industry use cases that are shaping our future.</p>
+        
+        <!-- Buttons -->
+        <div style="margin-top: 15px;">
+            <button style="background-color: darkblue; color: white; border: none; padding: 8px 14px; margin: 5px; border-radius: 5px; cursor: pointer;">Real Applications</button>
+        </div>
+    </div>
+</div>
+
+<div class="ai-hierarchy" style="display: flex; text-align: center; padding: 20px" >
+    <div class="ai-image" style="display: flex;">
+        <img src="{{ url_for('static', filename='AI.jpg') }}" alt="AI Hierarchy Diagram" style="width: 300px; height: 200; margin-bottom: 15px; text-align: center">
+    </div>
+
+    <div class="text-box" >
+        <h2>Understanding the AI Hierarchy</h2>
+        <ul>
+            <li  style="color:blue;"><b>Artificial Intelligence</b> - The broadest field encompassing all systems that can perform tasks requiring human-like intelligence</li>
+            <li style="color:purple;"><b>Machine Learning</b> - A subset of AI where systems learn patterns from data without explicit programming</li>
+            <li style="color:green;"><b>Neural Networks</b> - Computing systems inspired by biological neural networks, forming the foundation for deep learning</li>
+            <li style="color:darkorange;"><b>Deep Learning</b> - Advanced neural networks with multiple layers that can learn complex patterns</li>
+            <li style="color:red;"><b>Generative AI</b> - The most specialized area focusing on creating new content like text, images, and code</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="background-color: darkblue; color: white; text-align: center; padding: 15px; margin-top: 50px; border-radius: 8px;">
+    © 2025 The World of Artificial Intelligence | All Rights Reserved
+</div>
+
+
+</body>
+</html>
