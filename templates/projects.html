@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dataset Analyzer</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; text-align: center; padding: 30px; }
+    .box { background: white; padding: 30px; border-radius: 12px; display: inline-block; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); max-width: 900px; text-align: left; }
+    .table { margin: 20px auto; border-collapse: collapse; }
+    .table th, .table td { border: 1px solid #ddd; padding: 8px; }
+    .table th { background: #007BFF; color: white; }
+    .columns-box { background: #eef6ff; padding: 10px; margin: 15px 0; border-radius: 8px; }
+    .error { color: red; font-weight: bold; }
+    button { padding: 10px 20px; background: darkblue; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: green; }
+    /* Navbar */
+    .navbar {
+      background-color: darkblue;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: flex-end; /* Push items to right */
+      align-items: center;
+    }
+
+    .navbar a {
+      background-color: darkblue;
+      color: white;
+      padding: 10px 18px;
+      margin-left: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: rgb(0, 128, 75);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="/home">Home</a>
+    <a href="/ai">AI</a>
+    <a href="/aitools">AI Tools</a>
+    <a href="/projects">Projects</a>
+    <a href="/Documents">Documents</a>
+    <a href="/contact">Contact</a>
+    <a href="/Signout">Signout</a>
+  </div>
+  <div class="box">
+    <h2>📂 Upload a Dataset</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required>
+      <br><br>
+      <button type="submit">Upload</button>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if stage == "select" %}
+      <hr>
+      <h2>📊 Dataset Info</h2>
+      <p><b>File:</b> {{ filename }}</p>
+      <p><b>Rows:</b> {{ rows }}</p>
+      <p><b>Columns:</b> {{ cols }}</p>
+      <div class="columns-box">
+        <b>Column Names:</b>
+        <ul style="list-style:none; padding:0;">
+          {% for col in columns %}
+            <li>🔹 {{ col }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <h3>🔎 Preview (first 5 rows)</h3>
+      <div>{{ preview|safe }}</div>
+    {% endif %}
+      <hr>
+      <h2>⚙️ Choose Target & Features</h2>
+    {% if stage == "select" %}
+      <form method="POST">
+        <input type="hidden" name="filename" value="{{ filename }}">
+        <label>Select Target:</label>
+        <select name="target">
+          {% for col in columns %}
+            <option value="{{ col }}">{{ col }}</option>
+          {% endfor %}
+        </select><br><br>
+
+        <label>Select Features:</label><br>
+        {% for col in columns %}
+          <input type="checkbox" name="features" value="{{ col }}"> {{ col }}<br>
+        {% endfor %}<br>
+
+        <label>Select Chart Type:</label>
+        <select name="chart_type">
+          <option value="line">Line Graph</option>
+          <option value="bar">Bar Chart</option>
+          <option value="hist">Histogram</option>
+          <option value="scatter">Scatter Plot</option>
+          <option value="pie">Pie Chart</option>
+          <option value="3d">3D Plot</option>
+        </select><br><br>
+
+        <button type="submit">Run Analysis</button>
+      </form>
+    {% endif %}
+
+    {% if stage == "results" %}
+      <hr>
+      <h2>📈 Analysis Results</h2>
+      <p><b>File:</b> {{ filename }}</p>
+      <p><b>Target:</b> {{ target }}</p>
+      <p><b>Features:</b> {{ features }}</p>
+      <ul>
+        {% for key, value in results.items() %}
+          <li><b>{{ key }}:</b> {{ value }}</li>
+        {% endfor %}
+      </ul>
+
+      {% if plot %}
+        <h3>📊 Regression Plot</h3>
+        <img src="{{ url_for('uploaded_file', filename=plot.split('/')[-1]) }}" alt="Plot" style="max-width:600px;">
+      {% endif %}
+
+      <br>
+      <a href="/projects">⬅️ Upload Another Dataset</a>
+    {% endif %}
+  </div>
+  
+</body>
+</html>

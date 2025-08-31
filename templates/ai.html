@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Topics</title>
+    <style>
+      /* Navbar */
+        .navbar {
+          background-color: darkblue;
+          padding: 12px 20px;
+          display: flex;
+          justify-content: flex-end; /* Push items to right */
+          align-items: center;
+        }
+
+        .navbar a {
+          background-color: darkblue;
+          color: white;
+          padding: 10px 18px;
+          margin-left: 10px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: background 0.3s;
+        }
+
+        .navbar a:hover {
+          background-color: rgb(0, 128, 75);
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f5f6fa;
+        }
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        select, input {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            min-width: 200px;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .cards {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .badge {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #007bff;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        .difficulty {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .beginner { color: green; }
+        .intermediate { color: orange; }
+        .advanced { color: red; }
+        .details {
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .extra {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid #eee;
+        }
+        .section-title {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="/home">Home</a>
+    <a href="/ai">AI</a>
+    <a href="/aitools">AI Tools</a>
+    <a href="/projects">Projects</a>
+    <a href="/Documents">Documents</a>
+    <a href="/contact">Contact</a>
+    <a href="/Signout">Signout</a>
+  </div>
+  <!-- Page Content --> 
+  <div class="content"> 
+    <h1>AI Page</h1> 
+    <img src="{{ url_for('static', filename='images.jpeg') }}" alt="AI Section" style="max-width:80%; border-radius: 12px;"> 
+  </div>
+    <h2>Filters</h2>
+    <form class="filter-container" method="GET" action="/ai">
+        <input type="text" name="search" placeholder="Search AI topics..." value="{{ request.args.get('search', '') }}">
+        <select name="category">
+            <option value="">Select Category</option>
+            <option value="ml" {% if request.args.get('category')=='ml' %}selected{% endif %}>Machine Learning</option>
+            <option value="dl" {% if request.args.get('category')=='dl' %}selected{% endif %}>Deep Learning</option>
+            <option value="nlp" {% if request.args.get('category')=='nlp' %}selected{% endif %}>NLP</option>
+            <option value="rl" {% if request.args.get('category')=='rl' %}selected{% endif %}>Reinforcement Learning</option>
+        </select>
+        <select name="difficulty">
+            <option value="all" {% if request.args.get('difficulty')=='all' %}selected{% endif %}>All</option>
+            <option value="beginner" {% if request.args.get('difficulty')=='beginner' %}selected{% endif %}>Beginner</option>
+            <option value="intermediate" {% if request.args.get('difficulty')=='intermediate' %}selected{% endif %}>Intermediate</option>
+            <option value="advanced" {% if request.args.get('difficulty')=='advanced' %}selected{% endif %}>Advanced</option>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
+
+    <div class="cards">
+        {% for topic in results %}
+        <div class="card">
+            <h3>{{ topic.title }} <span class="badge">{{ topic.category_name }}</span></h3>
+            <p>{{ topic.description }}</p>
+            <p class="difficulty {{ topic.difficulty }}">{{ topic.difficulty|capitalize }}</p>
+
+            <p class="details" onclick="toggleDetails('{{ loop.index }}')">Show More Details ▼</p>
+
+            <div class="extra" id="details-{{ loop.index }}" style="display:none;">
+                <div class="section-title">📂 Type Structure & Hierarchy</div>
+                <ul>
+                    {% for section, items in topic.details.structure.items() %}
+                    <li><b>{{ section }}</b>
+                        <ul>
+                            {% for i in items %}
+                            <li>{{ i }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="section-title">🔥 Popular AI Tools & Frameworks</div>
+                <div>
+                    {% for fw in topic.details.frameworks %}
+                    <span class="badge" style="background:#ffe0b2; color:#e65100;">{{ fw }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">🌍 Real-World Applications</div>
+                <div>
+                    {% for app in topic.details.applications %}
+                    <span class="badge" style="background:#bbdefb; color:#0d47a1;">{{ app }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="section-title">🔑 Key Algorithms & Techniques</div>
+                <div>
+                    {% for alg in topic.details.algorithms %}
+                    <span class="badge" style="background:#f3e5f5; color:#6a1b9a;">{{ alg }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+    function toggleDetails(id) {
+        const section = document.getElementById("details-" + id);
+        if (section.style.display === "none") {
+            section.style.display = "block";
+        } else {
+            section.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>
